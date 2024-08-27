@@ -5,15 +5,6 @@ import os
 width = 60
 height = 16
 
-# Road frames
-road_frames = [
-    "===   ===   ===   ===   ===   ===   ===   ===   ===   ===   ===   ===",    # 70 chars > width   ==> OK
-    "==   ===   ===   ===   ===   ===   ===   ===   ===   ===   ===   === ",
-    "=   ===   ===   ===   ===   ===   ===   ===   ===   ===   ===   ===  ",
-    "   ===   ===   ===   ===   ===   ===   ===   ===   ===   ===   ===   ",
-    "  ===   ===   ===   ===   ===   ===   ===   ===   ===   ===   ===   =",
-    " ===   ===   ===   ===   ===   ===   ===   ===   ===   ===   ===   =="
-]
 
 # Read file -> get art
 def read_ascii_art(file_path):
@@ -53,8 +44,6 @@ lyrics = {
     103 : "hell",
     105 : "hell..."
 }
-
-
 
 
 # Format seconds -> timer
@@ -138,19 +127,10 @@ screen = [[' ' for _ in range(width)] for _ in range(height)]
 def animate():
     
     start_time = time.time()
-    road_frame_index = 0
-    car_frame_index = 0
     art_pos = 0
     building_pos = width
 
     while True:
-        # get road frame based on current index
-        if road_frame_index >= len(road_frames):
-            road_frame_index = 0
-        
-        if road_frame_index == 0 or road_frame_index == 3:
-            car_frame_index = 0 if car_frame_index == 1 else 1
-
         # get lyric based on timestamp
         lyric = None
         second = int(time.time() - start_time) + seek
@@ -168,7 +148,6 @@ def animate():
 
         update_screen(lyric, aircraft_art, art_pos, second, building_art, building_pos)
         render_screen()
-        road_frame_index += 1
         time.sleep(0.03)
 
 
